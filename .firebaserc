@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-oshop-4494e": {
+      "hosting": {
+        "angular-oshop": [
+          "angular-oshop-4494e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-oshop-4494e"
+  }
+}
