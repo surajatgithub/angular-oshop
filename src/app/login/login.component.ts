@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  constructor(
+    private auth: AuthService,
+    private route: ActivatedRoute
+  ) {
 
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+
+  }
+
+  login() {
+    let redirectUrl = this.route.snapshot.queryParamMap.get('redirectUrl') || '/';
+    localStorage.setItem('redirectUrl', redirectUrl);
+    this.auth.login();
+  }
 }
