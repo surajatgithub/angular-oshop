@@ -10,16 +10,16 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  appUser$;
-
+  
   constructor(
     private auth: AuthService,
     private router: Router,
     private userService: UserService
   ) {
-    this.appUser$ = this.auth.appUser$.subscribe(
+    this.auth.user$.subscribe(
       (user) => {
         if (user) {
+          this.userService.save(user);
           let redirectUrls = localStorage.getItem('redirectUrl') || '/';
           this.router.navigateByUrl(redirectUrls);
         }
@@ -28,6 +28,6 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.appUser$.unsubscribe();
+
   }
 }
