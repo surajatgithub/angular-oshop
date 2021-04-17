@@ -16,13 +16,13 @@ export class UserService {
   }
 
   save(user: firebase.User) {
-    this.afDatabase.object('/user/' + user.uid).update({
+    this.afDatabase.object('/users/' + user.uid).update({
       name: user.displayName,
       email: user.email
     });
   }
 
   get(uid: string) {
-    return this.afDatabase.object('/user/' + uid).valueChanges();
+    return this.afDatabase.object('/users/' + uid).valueChanges();
   }
 }

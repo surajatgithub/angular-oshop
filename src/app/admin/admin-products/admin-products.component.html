@@ -1,1 +1,27 @@
-<p>admin-products works!</p>
+<p>
+    <button class="btn btn-primary" routerLink="/admin/products/new">
+        Add Product
+    </button>
+</p>
+<p>
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Filter..." />
+</p>
+
+<table class="table">
+    <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let p of filteredProducts">
+        <td>
+            <img [src]="p.imageUrl" class="img-thumbnail" width="150px;" />
+        </td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.price | currency:'USD':true }}</td>
+        <td>
+            <a [routerLink]="['/admin/products/', p.key]" class="btn-link">Edit</a>
+        </td>
+    </tr>
+</table>

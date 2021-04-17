@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -20,8 +20,11 @@ export class AppComponent implements OnDestroy {
       (user) => {
         if (user) {
           this.userService.save(user);
-          let redirectUrls = localStorage.getItem('redirectUrl') || '/';
-          this.router.navigateByUrl(redirectUrls);
+          let redirectUrls = localStorage.getItem('redirectUrl');
+          if (redirectUrls) {
+            localStorage.removeItem('redirectUrl');
+            this.router.navigateByUrl(redirectUrls);
+          }
         }
       }
     );

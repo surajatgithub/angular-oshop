@@ -1,3 +1,4 @@
+import { ProductService } from './../../product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
+  products;
+  filteredProducts;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private productService: ProductService) {
+    this.productService.products$.subscribe(
+      (products) => {
+        this.products = this.filteredProducts = products;
+      }
+    );
   }
 
+  filter(filter: string = null) {
+    this.filteredProducts = filter
+      ? this.products.filter(p => (p.title as string).toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
+      : this.products;
+  }
+
+  ngOnInit(): void {
+
+  }
 }
