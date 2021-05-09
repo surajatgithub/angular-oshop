@@ -1,0 +1,34 @@
+<form #checkOutForm="ngForm" (ngSubmit)="checkout()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input #name="ngModel" [(ngModel)]="shippingDetails.name" name="name" id="name" type="text" class="form-control" required />
+        <div *ngIf="name.touched && name.invalid" class="alert alert-danger mt-1">
+            Name field is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addressLine1">Address</label>
+        
+        <input #addressLine1="ngModel" [(ngModel)]="shippingDetails.addressLine1" name="addressLine1" id="addressLine1" type="text" class="form-control" required />
+        <div *ngIf="addressLine1.touched && addressLine1.invalid" class="alert alert-danger mt-1">
+            Address Line 1 field is required.
+        </div>
+
+        <input #addressLine2="ngModel" [(ngModel)]="shippingDetails.addressLine2" name="addressLine2" id="addressLine2" type="text" class="form-control mt-1" required />
+        <div *ngIf="addressLine2.touched && addressLine2.invalid" class="alert alert-danger mt-1">
+            Address Line 2 field is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input #city="ngModel" [(ngModel)]="shippingDetails.city" name="city" id="city" type="text" class="form-control" required />
+        <div *ngIf="city.touched && city.invalid" class="alert alert-danger mt-1">
+            City field is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="!checkOutForm.valid" class="btn btn-primary">
+            Place Order
+        </button>
+    </div>
+</form>
